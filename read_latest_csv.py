@@ -43,7 +43,6 @@ def update_readme(csv_file, month, data_table, monthly_totals):
     with open('README.md', 'w', encoding='utf-8') as readme:
         readme.write(f"## [{month}]({csv_file})\n\n")
 
-        readme.write("### Month\n")
         readme.write("|  | Total |\n")
         readme.write("| --- | ---: |\n")
         for identifier, total in monthly_totals.items():
