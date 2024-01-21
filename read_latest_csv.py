@@ -1,7 +1,6 @@
 import os
 import csv
 from datetime import datetime
-import subprocess
 
 def find_latest_csv():
     csv_files = [f for f in os.listdir('.') if f.endswith('.csv')]
@@ -32,15 +31,8 @@ def update_readme(csv_file, month, table):
         readme.write(f"## [{month}]({csv_file})\n\n")
         readme.write(table)
 
-def git_commit_and_push(filename, commit_message):
-    subprocess.run(['git', 'add', filename], check=True)
-    subprocess.run(['git', 'commit', '-m', commit_message], check=True)
-    subprocess.run(['git', 'push'], check=True)
-
 if __name__ == "__main__":
     latest_csv = find_latest_csv()
     month = extract_month_from_filename(latest_csv)
     markdown_table = csv_to_markdown_table(latest_csv)
     update_readme(latest_csv, month, markdown_table)
-
-    git_commit_and_push('README.md', f'realized value {month}')

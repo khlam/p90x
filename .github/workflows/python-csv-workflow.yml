@@ -1,4 +1,4 @@
-name: Run Python Script and Update README
+name: Update README
 
 on:
   push:
@@ -10,29 +10,19 @@ jobs:
     steps:
       - name: Checkout Repository
         uses: actions/checkout@v2
-        with:
-          ref: ${{ github.head_ref }}
 
       - name: Set up Python 3.8
         uses: actions/setup-python@v2
         with:
           python-version: '3.8'
 
-      - name: Configure Git
+      - name: Run Python Script to Update README
+        run: python update_readme_with_csv.py
+
+      - name: Commit and Push if Changes
         run: |
           git config --global user.email "${{github.actor}}@users.noreply.github.com"
           git config --global user.name "${{github.actor}}"
-
-      - name: Run Python Script
-        run: python read_latest_csv.py
-
-      - name: Check for modified files
-        id: git-check
-        run: echo ::set-output name=modified::$(if [ -n "$(git status --porcelain)" ]; then echo "true"; else echo "false"; fi)
-
-      - name: Update changes in GitHub repository
-        if: steps.git-check.outputs.modified == 'true'
-        run: |
-          git add -A .
-          git commit -m 'Update README with latest CSV data'
+          git add README.md
+          git commit -m "realized value" || exit 0  # Exit gracefully if no changes
           git push
