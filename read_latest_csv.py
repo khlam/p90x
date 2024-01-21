@@ -39,7 +39,7 @@ def csv_to_markdown_table_and_totals(file_name):
             # Apply bold and italics for even weeks, normal for odd weeks
             if week_number % 2 == 0:
                 # Even weeks
-                day_str = f"***{day}***"  # Bold and Italics
+                day_str = f"`{day}`"
             else:
                 # Odd weeks
                 day_str = str(day)  # Normal text
@@ -59,11 +59,11 @@ def update_readme(csv_file, month, data_table, monthly_totals):
         readme.write(f"## [{month}]({csv_file})\n\n")
 
         for identifier, total in monthly_totals.items():
-            readme.write(f"`{identifier}: **{total:.2f}**` ")
+            readme.write(f"`{identifier}: {total:.2f}` ")
 
         readme.write("\n")
         readme.write(data_table)
-        
+
     return
 
 if __name__ == "__main__":
