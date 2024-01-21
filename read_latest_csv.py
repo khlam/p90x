@@ -20,29 +20,18 @@ def csv_to_markdown_table(file_name):
     with open(file_name, mode='r', encoding='utf-8') as file:
         reader = csv.reader(file)
         headers = next(reader)
+        table = "| " + " | ".join(headers) + " |\n"
+        table += "| " + " | ".join(['---'] * len(headers)) + " |\n"
 
-        # Start the HTML table
-        table = "<table>\n<tr>"
-        # Add headers
-        for header in headers:
-            table += f"<th>{header}</th>"
-        table += "</tr>\n"
-
-        # Alternating row colors
-        row_color_1 = "background-color: #f0f0f0;"  # Light gray
-        row_color_2 = "background-color: #ffffff;"  # White
-
-        toggle_color = True  # Toggle for alternating colors
-
+        previous_week = None
         for row in reader:
-            color = row_color_1 if toggle_color else row_color_2
-            table += f"<tr style='{color}'>"
-            for cell in row:
-                table += f"<td>{cell}</td>"
-            table += "</tr>\n"
-            toggle_color = not toggle_color  # Toggle color for next row
-
-        table += "</table>"
+            # Assume the first column is the date in 'YYYY-MM-DD' format
+            current_week = datetime.strptime(row[0], '%Y-%m-%d').isocalendar()[1]
+            if previous_week is not None and current_week != previous_week:
+                # Insert a separator row
+                table += "| " + " | ".join(['---'] * len(headers)) + " |\n"
+            table += "| " + " | ".join(row) + " |\n"
+            previous_week = current_week
 
         return table
 
