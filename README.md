@@ -1,17 +1,18 @@
 ## [January 2024](2024-01.csv)
 
-| date | 06 | 34 | 85 | 93 |
-| --- | --- | --- | --- | --- |
-| 19 | 8.4 | 6.4 | 0 | 7.2 |
-| 18 | 7.61 | 7.62 | 0 | 6.4 |
-| 17 | 0 | 3.6 | 0 | 2 |
-| 16 | 0.4 | 4 | 0 | 4 |
-| 15 |  | 0 | 0 | 0 |
-| 12 | 0 | 0 | 0 | 0 |
-| 11 | 0 |  | 0 | 0 |
-| 10 | 0 | 0 | 0 | 0 |
-| 08 | 0 | 0 | 0 | 0 |
-| 05 | 0 | 0 | 0 | 0 |
-| 04 | 0 | 0 | 0 | 0 |
-| 03 | 0 | 0 | 0 | 0 |
-| 02 | 0 | 0 | 0 | 0 |
+<table>
+<tr><th>date</th><th>06</th><th>34</th><th>85</th><th>93</th></tr>
+<tr style='background-color: #f0f0f0;'><td>2024-01-19</td><td>8.4</td><td>6.4</td><td>0</td><td>7.2</td></tr>
+<tr style='background-color: #ffffff;'><td>2024-01-18</td><td>7.61</td><td>7.62</td><td>0</td><td>6.4</td></tr>
+<tr style='background-color: #f0f0f0;'><td>2024-01-17</td><td>0</td><td>3.6</td><td>0</td><td>2</td></tr>
+<tr style='background-color: #ffffff;'><td>2024-01-16</td><td>0.4</td><td>4</td><td>0</td><td>4</td></tr>
+<tr style='background-color: #f0f0f0;'><td>2024-01-15</td><td></td><td>0</td><td>0</td><td>0</td></tr>
+<tr style='background-color: #ffffff;'><td>2024-01-12</td><td>0</td><td>0</td><td>0</td><td>0</td></tr>
+<tr style='background-color: #f0f0f0;'><td>2024-01-11</td><td>0</td><td></td><td>0</td><td>0</td></tr>
+<tr style='background-color: #ffffff;'><td>2024-01-10</td><td>0</td><td>0</td><td>0</td><td>0</td></tr>
+<tr style='background-color: #f0f0f0;'><td>2024-01-08</td><td>0</td><td>0</td><td>0</td><td>0</td></tr>
+<tr style='background-color: #ffffff;'><td>2024-01-05</td><td>0</td><td>0</td><td>0</td><td>0</td></tr>
+<tr style='background-color: #f0f0f0;'><td>2024-01-04</td><td>0</td><td>0</td><td>0</td><td>0</td></tr>
+<tr style='background-color: #ffffff;'><td>2024-01-03</td><td>0</td><td>0</td><td>0</td><td>0</td></tr>
+<tr style='background-color: #f0f0f0;'><td>2024-01-02</td><td>0</td><td>0</td><td>0</td><td>0</td></tr>
+</table>
