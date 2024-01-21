@@ -20,17 +20,30 @@ def csv_to_markdown_table(file_name):
     with open(file_name, mode='r', encoding='utf-8') as file:
         reader = csv.reader(file)
         headers = next(reader)
-        table = "| " + " | ".join(headers) + " |\n"
-        table += "| " + " | ".join(['---'] * len(headers)) + " |\n"
+
+        # Start the HTML table
+        table = "<table>\n<tr>"
+        # Add headers
+        for header in headers:
+            table += f"<th>{header}</th>"
+        table += "</tr>\n"
+
+        # Alternating row colors
+        row_color_1 = "background-color: #f0f0f0;"  # Light gray
+        row_color_2 = "background-color: #ffffff;"  # White
+
+        toggle_color = True  # Toggle for alternating colors
+
         for row in reader:
-            try:
-                # Parse and reformat the date in the first column to show only the day
-                date = datetime.strptime(row[0], '%Y-%m-%d')
-                row[0] = date.strftime('%d')  # Format changed to include only the day
-            except ValueError:
-                # If parsing fails, leave the date as is
-                pass
-            table += "| " + " | ".join(row) + " |\n"
+            color = row_color_1 if toggle_color else row_color_2
+            table += f"<tr style='{color}'>"
+            for cell in row:
+                table += f"<td>{cell}</td>"
+            table += "</tr>\n"
+            toggle_color = not toggle_color  # Toggle color for next row
+
+        table += "</table>"
+
         return table
 
 def update_readme(csv_file, month, table):
