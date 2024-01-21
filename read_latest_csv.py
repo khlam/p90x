@@ -43,4 +43,4 @@ if __name__ == "__main__":
     markdown_table = csv_to_markdown_table(latest_csv)
     update_readme(latest_csv, month, markdown_table)
 
-    git_commit_and_push('README.md', f'Update README for {month}')
+    git_commit_and_push('README.md', f'realized value {month}')
