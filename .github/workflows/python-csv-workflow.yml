@@ -17,7 +17,7 @@ jobs:
           python-version: '3.8'
 
       - name: Run Python Script to Update README
-        run: python update_readme_with_csv.py
+        run: python read_latest_csv.py
 
       - name: Commit and Push if Changes
         run: |
