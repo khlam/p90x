@@ -27,8 +27,8 @@ def csv_to_markdown_table_and_totals(file_name):
             monthly_totals[header] = 0
 
         # Right-align all columns except the first (Day)
-        table += "| " + " | ".join([f"{header:>}" for header in headers]) + " |\n"
-        table += "| " + " | ".join([':---'] + ['---:'] * (len(headers) - 1)) + " |\n"
+        table += "| " + " | ".join(headers) + " |\n"
+        table += "|:---|" + "|---:" * (len(headers) - 1) + "|\n"
 
         for row in reader:
             date_str = row[0]
@@ -37,10 +37,10 @@ def csv_to_markdown_table_and_totals(file_name):
             day = date_obj.day
 
             # Right-align for odd weeks, left-align for even weeks
-            day_format = f"**{day}**" if week_number % 2 != 0 else f"{day:<}"
+            day_str = f"**{day}**" if week_number % 2 != 0 else str(day)
 
             # Right-align all other columns
-            table += "| " + " | ".join([day_format] + [f"{cell:>}" for cell in row[1:]]) + " |\n"
+            table += "| " + day_str + " | " + " | ".join([f"{cell:>}" for cell in row[1:]]) + " |\n"
             for i, value in enumerate(row[1:], start=1):
                 try:
                     monthly_totals[headers[i]] += float(value)
