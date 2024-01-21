@@ -29,26 +29,21 @@ def csv_to_markdown_table_and_totals(file_name):
         table += "| Day | " + " | ".join(headers[1:]) + " |\n"
         table += "| --- | " + " | ".join(['---'] * (len(headers) - 1)) + " |\n"
 
-        previous_week_number = None
-
         for row in reader:
             date_str = row[0]
             date_obj = datetime.strptime(date_str, '%Y-%m-%d')
             week_number = date_obj.isocalendar()[1]
             day = date_obj.day
 
-            if previous_week_number is not None and week_number != previous_week_number:
-                # Add a separator
-                table += "| --- |" + " --- |" * (len(headers) - 1) + "\n"
+            # Apply bold formatting to day numbers in odd weeks
+            day_str = f"**{day}**" if week_number % 2 != 0 else str(day)
 
-            table += "| " + str(day) + " | " + " | ".join(row[1:]) + " |\n"
+            table += "| " + day_str + " | " + " | ".join(row[1:]) + " |\n"
             for i, value in enumerate(row[1:], start=1):
                 try:
                     monthly_totals[headers[i]] += float(value)
                 except ValueError:
                     pass
-
-            previous_week_number = week_number
 
     return table, monthly_totals
 
