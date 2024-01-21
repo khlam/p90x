@@ -45,7 +45,7 @@ def csv_to_markdown_table_and_totals(file_name):
                 day_str = str(day)  # Normal text
 
             # Left-align the day number and right-align all other cells
-            table += "| " + day_str + " | " + " | ".join([f"{cell:>}" for cell in row[1:]]) + " |\n"
+            table += "| " + day_str + " | " + " | ".join([f"{cell:>}" for cell in row[1:]]) + " <tr></tr>|\n"
             for i, value in enumerate(row[1:], start=1):
                 try:
                     monthly_totals[headers[i]] += float(value)
