@@ -24,9 +24,9 @@ def csv_to_markdown_table(file_name):
         table += "| " + " | ".join(['---'] * len(headers)) + " |\n"
         for row in reader:
             try:
-                # Parse and reformat the date in the first column
+                # Parse and reformat the date in the first column to show only the day
                 date = datetime.strptime(row[0], '%Y-%m-%d')
-                row[0] = date.strftime('%B %d')
+                row[0] = date.strftime('%d')  # Format changed to include only the day
             except ValueError:
                 # If parsing fails, leave the date as is
                 pass
