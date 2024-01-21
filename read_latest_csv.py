@@ -28,8 +28,8 @@ def csv_to_markdown_table(file_name):
             # Assume the first column is the date in 'YYYY-MM-DD' format
             current_week = datetime.strptime(row[0], '%Y-%m-%d').isocalendar()[1]
             if previous_week is not None and current_week != previous_week:
-                # Insert a separator row
-                table += "| " + " | ".join(['---'] * len(headers)) + " |\n"
+                # Insert a visually distinct separator row
+                table += "| " + " | ".join(['&nbsp;'] * len(headers)) + " |\n"
             table += "| " + " | ".join(row) + " |\n"
             previous_week = current_week
 
