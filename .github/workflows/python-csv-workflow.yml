@@ -10,6 +10,9 @@ jobs:
     steps:
       - name: Checkout Repository
         uses: actions/checkout@v2
+        with:
+          token: ${{ secrets.GITHUB_TOKEN }} # Use GITHUB_TOKEN for checkout
+          ref: ${{ github.head_ref }}
 
       - name: Set up Python 3.8
         uses: actions/setup-python@v2
