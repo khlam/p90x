@@ -1,5 +1,14 @@
 ## [January 2024](2024-01.csv)
 
+### Monthly
+| Identifier | Total |
+| --- | ---: |
+| 06 | 16.41 |
+| 34 | 21.62 |
+| 85 | 0.00 |
+| 93 | 19.60 |
+
+### Weekly
 | Identifier | Total |
 | --- | ---: |
 | 06 | 16.41 |
