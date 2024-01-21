@@ -29,15 +29,15 @@ def csv_to_markdown_table_and_totals(file_name):
         table += "| Day | " + " | ".join(headers[1:]) + " |\n"
         table += "| --- | " + " | ".join(['---'] * (len(headers) - 1)) + " |\n"
 
-        previous_week_day = None
+        previous_week_number = None
 
         for row in reader:
             date_str = row[0]
             date_obj = datetime.strptime(date_str, '%Y-%m-%d')
-            week_day = date_obj.weekday()
+            week_number = date_obj.isocalendar()[1]
             day = date_obj.day
 
-            if previous_week_day is not None and week_day < previous_week_day:
+            if previous_week_number is not None and week_number != previous_week_number:
                 # Add a separator
                 table += "| --- |" + " --- |" * (len(headers) - 1) + "\n"
 
@@ -48,7 +48,7 @@ def csv_to_markdown_table_and_totals(file_name):
                 except ValueError:
                     pass
 
-            previous_week_day = week_day
+            previous_week_number = week_number
 
     return table, monthly_totals
 
