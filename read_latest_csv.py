@@ -36,10 +36,10 @@ def csv_to_markdown_table_and_totals(file_name):
             week_number = date_obj.isocalendar()[1]
             day = date_obj.day
 
-            # Apply bold for even weeks, normal for odd weeks
+            # Apply bold and italics for even weeks, normal for odd weeks
             if week_number % 2 == 0:
                 # Even weeks
-                day_str = f"**{day}**"  # Bold
+                day_str = f"***{day}***"  # Bold and Italics
             else:
                 # Odd weeks
                 day_str = str(day)  # Normal text
