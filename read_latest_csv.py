@@ -16,32 +16,43 @@ def extract_month_and_year_from_filename(filename):
     except ValueError:
         return "Unknown Date"
 
-def csv_to_markdown_table(file_name):
+def csv_to_markdown_table_and_monthly_earnings(file_name):
+    monthly_earnings = {}
+    table = ""
+
     with open(file_name, mode='r', encoding='utf-8') as file:
         reader = csv.reader(file)
         headers = next(reader)
-        table = "| " + " | ".join(headers) + " |\n"
+        # Initialize monthly earnings for each client
+        for header in headers:
+            monthly_earnings[header] = 0
+
+        # Markdown table headers
+        table += "| " + " | ".join(headers) + " |\n"
         table += "| " + " | ".join(['---'] * len(headers)) + " |\n"
 
-        previous_week = None
         for row in reader:
-            # Assume the first column is the date in 'YYYY-MM-DD' format
-            current_week = datetime.strptime(row[0], '%Y-%m-%d').isocalendar()[1]
-            if previous_week is not None and current_week != previous_week:
-                # Insert a visually distinct separator row
-                table += "| " + " | ".join(['&nbsp;'] * len(headers)) + " |\n"
             table += "| " + " | ".join(row) + " |\n"
-            previous_week = current_week
+            # Sum earnings for each client
+            for i, earning in enumerate(row):
+                try:
+                    monthly_earnings[headers[i]] += float(earning)
+                except ValueError:
+                    pass  # Ignore if conversion to float fails
 
-        return table
+    return table, monthly_earnings
 
-def update_readme(csv_file, month, table):
+def update_readme(csv_file, month, table, monthly_earnings):
     with open('README.md', 'w', encoding='utf-8') as readme:
         readme.write(f"## [{month}]({csv_file})\n\n")
+        # Print monthly earnings
+        for client, earning in monthly_earnings.items():
+            readme.write(f"**{client}:** {earning:.2f}\n")
+        readme.write("\n")
         readme.write(table)
 
 if __name__ == "__main__":
     latest_csv = find_latest_csv()
-    month_year = extract_month_and_year_from_filename(latest_csv)  # Updated function call
-    markdown_table = csv_to_markdown_table(latest_csv)
-    update_readme(latest_csv, month_year, markdown_table)
+    month = extract_month_and_year_from_filename(latest_csv)
+    markdown_table, monthly_earnings = csv_to_markdown_table_and_monthly_earnings(latest_csv)
+    update_readme(latest_csv, month, markdown_table, monthly_earnings)
