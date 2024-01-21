@@ -58,11 +58,12 @@ def update_readme(csv_file, month, data_table, monthly_totals):
     with open('README.md', 'w', encoding='utf-8') as readme:
         readme.write(f"## [{month}]({csv_file})\n\n")
 
-        for identifier, total in monthly_totals.items():
-            readme.write(f"{identifier}: **{total:.2f}**\t")
+    for identifier, total in monthly_totals.items():
+        readme.write(f"{identifier}: **{total:.2f}**&nbsp;&nbsp;&nbsp;")
 
-        readme.write("\n")
-        readme.write(data_table)
+    readme.write("\n")
+    readme.write(data_table)
+    return
 
 if __name__ == "__main__":
     latest_csv = find_latest_csv()
