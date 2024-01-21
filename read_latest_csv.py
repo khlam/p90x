@@ -23,8 +23,8 @@ def csv_to_markdown_table_and_monthly_earnings(file_name):
     with open(file_name, mode='r', encoding='utf-8') as file:
         reader = csv.reader(file)
         headers = next(reader)
-        # Initialize monthly earnings for each client
-        for header in headers:
+        # Initialize monthly earnings for each client, skipping the first column
+        for header in headers[1:]:
             monthly_earnings[header] = 0
 
         # Markdown table headers
@@ -33,19 +33,19 @@ def csv_to_markdown_table_and_monthly_earnings(file_name):
 
         for row in reader:
             table += "| " + " | ".join(row) + " |\n"
-            # Sum earnings for each client
-            for i, earning in enumerate(row):
+            # Sum earnings for each client, skipping the first column (date)
+            for i, earning in enumerate(row[1:], start=1):
                 try:
                     monthly_earnings[headers[i]] += float(earning)
                 except ValueError:
-                    pass  # Ignore if conversion to float fails
+                    pass  # Ignore if conversion to float fails or field is empty
 
     return table, monthly_earnings
 
 def update_readme(csv_file, month, table, monthly_earnings):
     with open('README.md', 'w', encoding='utf-8') as readme:
         readme.write(f"## [{month}]({csv_file})\n\n")
-        # Print monthly earnings
+        # Print monthly earnings, excluding the "date" column
         for client, earning in monthly_earnings.items():
             readme.write(f"**{client}:** {earning:.2f}\n")
         readme.write("\n")
