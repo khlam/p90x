@@ -19,7 +19,6 @@ def extract_month_and_year_from_filename(filename):
 def csv_to_markdown_table_and_totals(file_name):
     monthly_totals = {}
     table = ""
-    week_separator = "| --- " * 4 + "|\n"
 
     with open(file_name, mode='r', encoding='utf-8') as file:
         reader = csv.reader(file)
@@ -37,7 +36,6 @@ def csv_to_markdown_table_and_totals(file_name):
                     monthly_totals[headers[i]] += float(value)
                 except ValueError:
                     pass
-            table += week_separator  # Add a separator row after each week's data
 
     return table, monthly_totals
 
