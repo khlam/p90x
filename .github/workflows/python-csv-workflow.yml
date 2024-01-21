@@ -4,10 +4,13 @@ on:
   push:
     branches:
       - main
+    paths-ignore:
+      - 'README.md'  # Ignore changes in README.md
 
 jobs:
   read-csv-file:
     runs-on: ubuntu-latest
+    if: github.actor != 'github-actions[bot]'  # Prevent re-triggering
 
     steps:
     - name: Checkout Repository
@@ -19,4 +22,4 @@ jobs:
         python-version: '3.8'
 
     - name: Run Python Script
-      run: python read_latest_csv.py
+      run: python update_readme_with_csv.py
