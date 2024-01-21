@@ -5,13 +5,11 @@ on:
     branches: [main]
 
 jobs:
-  update-readme:
+  test-generator:
     runs-on: ubuntu-latest
-    steps:
-      - name: Checkout Repository
-        uses: actions/checkout@v2
+    steps: 
+      - uses: actions/checkout@v2
         with:
-          token: ${{ secrets.GITHUB_TOKEN }} # Use GITHUB_TOKEN for checkout
           ref: ${{ github.head_ref }}
 
       - name: Set up Python 3.8
