@@ -26,9 +26,9 @@ def csv_to_markdown_table_and_totals(file_name):
         for header in headers[1:]:
             monthly_totals[header] = 0
 
-        # Set right alignment for all columns
+        # Left-align the first column (Day) and right-align all other columns
         table += "| " + " | ".join(headers) + " |\n"
-        table += "|---:" * len(headers) + "|\n"
+        table += "|:---" + "|---:" * (len(headers) - 1) + "|\n"
 
         for row in reader:
             date_str = row[0]
@@ -44,8 +44,8 @@ def csv_to_markdown_table_and_totals(file_name):
                 # Odd weeks
                 day_str = str(day)  # Normal text
 
-            # Format the row with right-aligned cells
-            table += "| " + " | ".join([f"{day_str:>}", *[f"{cell:>}" for cell in row[1:]]]) + " |\n"
+            # Left-align the day number and right-align all other cells
+            table += "| " + day_str + " | " + " | ".join([f"{cell:>}" for cell in row[1:]]) + " |\n"
             for i, value in enumerate(row[1:], start=1):
                 try:
                     monthly_totals[headers[i]] += float(value)
