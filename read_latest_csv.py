@@ -4,7 +4,10 @@ from datetime import datetime
 
 def find_latest_csv():
     csv_files = [f for f in os.listdir('.') if f.endswith('.csv')]
-    latest_file = max(csv_files, key=os.path.getmtime)
+    # Convert filenames to datetime objects for comparison
+    dates_and_files = [(datetime.strptime(f, '%Y-%m.csv'), f) for f in csv_files]
+    # Find the file with the latest date
+    latest_file = max(dates_and_files, key=lambda x: x[0])[1]
     return latest_file
 
 def extract_month_and_year_from_filename(filename):
